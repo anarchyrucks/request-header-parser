@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 	"regexp"
 	"strings"
 
@@ -21,7 +22,8 @@ func main() {
 	r.HandleFunc("/", rootHandler)
 	http.Handle("/", r)
 
-	http.ListenAndServe(":3000", nil)
+	port := os.Getenv("PORT")
+	http.ListenAndServe(":"+port, nil)
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
